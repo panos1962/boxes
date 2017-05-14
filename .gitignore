@@ -1,0 +1,9 @@
+syntax: glob
+*.o
+*.exe
+*.swp
+*/boxes.tab.c
+*/boxes.tab.h
+*/lex.yy.c
+*/x.tab.h
+src/*.html

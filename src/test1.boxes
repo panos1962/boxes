@@ -1,0 +1,286 @@
+{
+	[[ "User Space" ]]
+
+	{
+		[ "User Commands" ]
+
+		[ SkyBlue ] {
+			[ "Shell (sh)" ]
+		}
+
+		[ SkyBlue ] {
+			[ "Program Development" ]
+
+			"as",
+			"ar",
+			"b",
+			"bas",
+			"ed",
+			"db",
+			"for",
+			"ld",
+			"nm",
+			...
+		}
+
+		[ SkyBlue ] {
+			[ "File Management" ]
+
+			"ls",
+			"cp",
+			"cmp",
+			"mkdir",
+			"ln",
+			...
+		}
+
+		[ SkyBlue ] {
+			[ "Text Processing" ]
+
+			"wc",
+			"cat",
+			"sort",
+		}
+
+		;
+
+		[ SkyBlue ] {
+			[ "Multiuser Commands" ]
+
+			"login",
+			"chown",
+			"chmod",
+			"su",
+			"who",
+			...
+		}
+
+		[ SkyBlue ] {
+			[ "User Messaging" ]
+
+			"mail",
+			"mesg",
+			"write",
+		}
+
+		[ SkyBlue ] {
+			[ "Document Preparation" ]
+
+			"roff",
+			"form",
+			"pr",
+			...
+		}
+
+		{
+			[ "Games" ]
+
+			"bj",
+			"chess",
+			"moo",
+			"ttt",
+		}
+	}
+
+	{
+		[ "Administrator & System Commands" ]
+
+		{
+			[ "Filesystem Management" ]
+
+			"check",
+			"mkfs" [ Bisque ],
+			"mount" [ Bisque ],
+			"umount" [ Bisque ],
+			"rkd",
+			"rkl",
+			"rkf",
+			...
+		}
+
+		{
+			[ "Peripheral Access" ]
+
+			"bcd",
+			"dtf",
+			"lbppt",
+			"rew",
+			"tap",
+			"type",
+			...
+		}
+
+		{
+			[ ... ]
+		}
+	}
+
+	;
+
+	{
+		[ "Library" ]
+
+		{
+			[ "Assembly Subroutines Library" ]
+
+			"atof" [ LightGreen ],
+			"atoi" [ LightGreen ],
+			"ctime" [ LightGreen ],
+			"exp" [ LightGreen ],
+			"fptrap",
+			"ftoa",
+			"get",
+			"itoa",
+			"log" [ LightGreen ],
+			"mesg",
+			"ptime",
+			"putc" [ LightGreen ],
+			"sin" [ LightGreen ],
+			"switch",
+		}
+
+		{
+			[ "B Library" ]
+
+			"char",
+			"getchr" [ LightGreen ],
+			"putchr" [ LightGreen ],
+			"printf" [ LightGreen ],
+			"lchr",
+			"execl" [ LightGreen ],
+			"execv" [ LightGreen ],
+			"intr",
+			"link",
+			"makdir",
+			"ctime" [ LightGreen ],
+			...
+		}
+	}
+}
+
+;
+
+{
+	[[ "Kernel Space" ]]
+
+	{
+		[ "System Call Interface" ]
+
+		"break" [ LightPink ],
+		"cemt",
+		"chdir" [ LightPink ],
+		"chmod" [ LightPink ],
+		"chown" [ LightPink ],
+		"close" [ LightPink ],
+		"creat" [ LightPink ],
+		"exec" [ LightPink ],
+		"exit" [ LightPink ],
+		"fork" [ LightPink ],
+		"fstat" [ LightPink ],
+		"getuid" [ LightPink ],
+		"gtty",
+		"ilgins",
+		"intr",
+		"link" [ LightPink ],
+		"mkdir" [ LightPink ],
+		"mdate",
+		"mount" [ LightPink ],
+		"open" [ LightPink ],
+		"quit",
+		"read" [ LightPink ],
+		"rele",
+		"seek" [ LightPink ],
+		"setuid" [ LightPink ],
+		"smdate",
+		"stat" [ LightPink ],
+		"stime",
+		"stty" [ LightPink ],
+		"tell" [ LightPink ],
+		"time",
+		"umount" [ LightPink ],
+		"unlink" [ LightPink ],
+		"wait" [ LightPink ],
+		"write" [ LightPink ],
+	}
+
+	[ Khaki ] {
+		[ "Boot Loader" ]
+	}
+
+	;
+
+	vbox {
+		[ "Kernel Utility Functions" ]
+
+		"iget",
+		"access",
+		"mget",
+		"wakeup" [ Plum ],
+		"sleep",
+		"namei" [ Plum ],
+		"panic" [ Plum ],
+		"free" [ Plum ],
+		"alloc",
+	}
+
+	{
+		[ "I/O Subsystem" ]
+
+		{
+			hbox [ LightSkyBlue ] {
+				[ "Special Devices" ]
+
+				"Line discipline",
+				"tty",
+				"Raw character",
+				"Raw disk",
+			}
+
+			{
+				[ "Filesystem" ]
+
+				hbox [ LightSkyBlue ] {
+					[ "inode layer" ]
+				}
+
+				;
+
+				hbox {
+					[ "block layer" ]
+				}
+			}
+
+			;
+
+			{
+				[ "Device Drivers" ]
+
+				{
+					[ "Character Devices" ]
+
+					"Keyboard",
+					"Printer",
+					"Paper tape",
+					...
+				}
+
+				{
+					[ "Block Devices" ]
+
+					"rk: RK03 disk",
+					"rf: RK11 disk",
+					"mem",
+				}
+			}
+		}
+
+		{
+			[ "Process Control Subsystem" ]
+
+			"Scheduler" [ Khaki ],
+			"Swap manager",
+			"Memory manager" [ Khaki ],
+			...
+		}
+	}
+}
