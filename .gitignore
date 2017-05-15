@@ -6,4 +6,3 @@ syntax: glob
 */boxes.tab.h
 */lex.yy.c
 */x.tab.h
-src/*.html

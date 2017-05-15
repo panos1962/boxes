@@ -25,8 +25,8 @@ x.tab.h: $(NAME).tab.h
 $(NAME).tab.h: $(NAME).y
 
 test: $(EXEC) $(TEST1) $(TEST2)
-	 # $(EXEC) -h $(TEST1) >test1.html && google-chrome --new-window test1.html
-	 $(EXEC) -h $(TEST2) >test2.html && google-chrome --new-window test2.html
+	 $(EXEC) -h $(TEST1) >test1.html && google-chrome --new-window test1.html
+	 # $(EXEC) -h $(TEST2) >test2.html && google-chrome --new-window test2.html
 
 cleanup:
 	@rm -f *.exe *.o *.html $(NAME).tab.c lex.yy.c $(NAME).tab.h x.tab.h
