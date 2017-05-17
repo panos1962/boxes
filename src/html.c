@@ -1,26 +1,31 @@
 #include "boxes.h"
 #include <string.h>
 
-static void blist_html(BLIST *);
+static void blist_html(BLIST *, unsigned int);
 static void vlist_html(BOX *);
 static void hlist_html(BOX *);
 
-static void box_html(BOX *box) {
-	if (box->section)
+static void box_html(BOX *box, unsigned int section) {
+	if (section)
 	puts("<br/>");
 
-	printf("<div class=\"box\"");
-
-	if (box->color)
-	printf(" style=\"background-color:%s;\"", box->color);
-
-	puts(">");
-
 	if (box->ilist) {
+		printf("<div class=\"box");
+
+		if (box->vertical == BOX_WIDE)
+		printf(" wbox");
+
+		putchar('"');
+
+		if (box->color)
+		printf(" style=\"background-color:%s;\"", box->color);
+
+		puts(">");
+
 		puts("<table>");
 		printf("<tbody>");
 
-		if (box->vertical)
+		if (box->vertical == BOX_VERTICAL)
 		vlist_html(box);
 
 		else
@@ -31,6 +36,24 @@ static void box_html(BOX *box) {
 	}
 
 	else {
+		printf("<div class=\"box");
+
+		switch (box->vertical) {
+		case BOX_VERTICAL:
+			printf(" vbox");
+			break;
+		case BOX_WIDE:
+			printf(" wbox");
+			break;
+		}
+
+		printf("\"");
+
+		if (box->color)
+		printf(" style=\"background-color:%s;\"", box->color);
+
+		puts(">");
+
 		if (box->title) {
 			printf("<div class=\"header");
 
@@ -48,7 +71,7 @@ static void box_html(BOX *box) {
 	}
 
 	if (box->blist)
-	blist_html(box->blist);
+	blist_html(box->blist, 0);
 
 	puts("</div>");
 }
@@ -66,7 +89,7 @@ static void hlist_html(BOX *box) {
 		box->title
 	);
 
-	puts("<tr>");
+	puts("<tr class=\"ilist\">");
 	for (p = box->ilist; p; p = p->nxt) {
 		printf("<td");
 
@@ -121,12 +144,12 @@ static void vlist_html(BOX *box) {
 	puts("</td>");
 }
 
-static void blist_html(BLIST *blist) {
+static void blist_html(BLIST *blist, unsigned int section) {
 	if (!blist)
 	return;
 
-	box_html(blist->box);
-	blist_html(blist->nxt);
+	box_html(blist->box, section);
+	blist_html(blist->nxt, blist->box->section);
 }
 
 void printer_html(BLIST *root, size_t level) {
@@ -146,19 +169,26 @@ void printer_html(BLIST *root, size_t level) {
 	"table{border-collapse:collapse;}"
 	"td{padding:2px;}"
 	"table,td{border:2px solid black;}"
-	".box{display:inline-block;margin:10px;vertical-align:top;"
+	".box{position:relative;display:inline-block;margin:10px;vertical-align:top;"
 	"border-style:solid;border-width:2px}"
+	".wbox{display:block;}"
 	".tbox{border-style:none;}"
 	".header{text-align:center;padding:2px;text-shadow:1px 0px 0px #343434;}"
 	".vertical{padding:2px;writing-mode:vertical-lr;transform:rotate(-180deg);vertical-align:bottom;}"
         ".horizontal{padding:2px;border-style:none none solid none;border-width:2px;}"
 	".horizontal_td{padding:0;vertical-align:top;}"
+	".vcont{position:absolute;transform:rotate(-90deg);}"
+	".antivertical{transform:none;}"
 	"</style>"
 
 	"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>"
 
 	"<script type=\"text/javascript\">"
 	"\n//<![CDATA[\n"
+
+	"$(window).on('resize', function() {"
+		"location.reload();"
+	"});"
 
 	"$(document).ready(function() {"
 		"$('table').each(function() {"
@@ -167,12 +197,14 @@ void printer_html(BLIST *root, size_t level) {
 			"var hmax = 0;"
 			"var wone = 0;"
 			"var wall = 0;"
+			"var vblist;"
+			"var vbi;"
 
 			"$(this).parent().addClass('tbox');"
 
 			"list = $(this).find('.vertical');"
-			"if (list.length) {"
 
+			"if (list.length) {"
 				"list.each(function() {"
 					"var h = $(this).height();"
 
@@ -185,13 +217,16 @@ void printer_html(BLIST *root, size_t level) {
 					"}"
 
 					"wall += $(this).parent().innerWidth();"
+
+					"return true;"
 				"});"
 
 				"list.css('height', hmax + 'px');"
 
 				"if (filler) {"
 					"if ((wall / list.length) / wone > 1.2)"
-					"filler.parent().css('width', (wall - (list.length * wone) + wone) + 'px');"
+					"filler.parent().css('width', "
+						"(wall - (list.length * wone) + wone) + 'px');"
 				"}"
 			"}"
 
@@ -202,9 +237,50 @@ void printer_html(BLIST *root, size_t level) {
 				"});"
 
 				"$(list[list.length - 1]).css('border-style', 'none');"
+
+				"return true;"
 			"}"
+
+			"return true;"
 		"});"
+
+		"vblist = $('.vbox');"
+		"for (vbi = vblist.length - 1; vbi >= 0; vbi--)"
+		"vbox_render($(vblist[vbi]));"
 	"});"
+
+	"function vbox_render(box) {"
+		"vb = true;"
+		"var w = box.outerWidth(true);"
+		"var w1 = box.width();"
+		"var h = box.outerHeight(true);"
+		"var h1 = box.height();"
+		"var x = box.html();"
+		"var y;"
+
+		"box.removeClass('vbox');"
+		"box.css({"
+			"width: h + 'px',"
+			"height: w + 'px',"
+		"}).empty()."
+		"append(y = $('<div>').addClass('vcont').html(x).css({"
+			"top: ((w / 2) - (h1 / 2)) + 'px',"
+			"left: ((h / 2) - (w1 / 2)) + 'px',"
+		"}));"
+
+		"y.find('.vertical').addClass('antivertical');"
+
+		"box.find('.ilist').each(function() {"
+			"var x = $(this).children();"
+			"var i;"
+
+			"$(this).empty();"
+			"for (i = x.length - 1; i >= 0; i--)"
+			"$(this).append(x.get(i));"
+
+			"return true;"
+		"});"
+	"}"
 
 	"\n//]]>\n"
 	"</script>"
@@ -213,7 +289,7 @@ void printer_html(BLIST *root, size_t level) {
 	"<body>"
 	);
 
-	blist_html(root);
+	blist_html(root, 0);
 
 	puts(
 	"</body>"

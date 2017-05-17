@@ -10,6 +10,7 @@ BOX *box_alloc(void) {
 	p->font = 0;
 	p->vertical = 0;
 	p->color = NULL;
+	p->section = 0;
 	p->blist = NULL;
 	p->ilist = NULL;
 
@@ -42,4 +43,40 @@ BLIST *box_push(BLIST *l, BOX *b) {
 
 	q->nxt = p;
 	return l;
+}
+
+// Εντοπίζουμε το τελευταίο box της λίστας και το καθιστούμε τελευταίο box
+// της ενότητας στην οποία ανήκει, επομένως το επόμενο box θα εκτυπωθεί με
+// line break.
+
+BLIST *break_push(BLIST *l) {
+	BLIST *p;
+
+	if (!l)
+	return l;
+
+	for (p = l; p->nxt;)
+	p = p->nxt;
+
+	p->box->section = 1;
+	return l;
+}
+
+// Η function "blist_push" δέχεται μια box list και την τοποθετεί στο τέλος της
+// global box list "root".
+
+BLIST *blist_push(BLIST *l) {
+	BLIST *p;
+
+	// Αν η "root" box list είναι κενή, τότε πρόκειται για την πρώτη box list,
+	// επομένως καθίσταται "root".
+
+	if (!root)
+	return l;
+
+	for (p = root; p->nxt;)
+	p = p->nxt;
+
+	p->nxt = l;
+	return root;
 }

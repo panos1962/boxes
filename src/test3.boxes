@@ -107,11 +107,9 @@
 		}
 
 		{
-			[ "..." ]
+			[ ... ]
 		}
 	}
-
-	;
 
 	{
 		[ "Administrator & System Commands" ]
@@ -155,6 +153,8 @@
 			...
 		}
 
+		;
+
 		{
 			[ "Network Servers" ]
 
@@ -177,7 +177,7 @@
 		}
 
 		{
-			...
+			[ ... ]
 		}
 	}
 
@@ -233,8 +233,6 @@
 			...
 		}
 
-		;
-
 		{
 			[ "Data Handling" ]
 
@@ -276,7 +274,7 @@
 		}
 
 		{
-			...
+			[ ... ]
 		}
 	}
 }
@@ -425,18 +423,6 @@
 	}
 
 	{
-		[ "Process Control Subsystem" ]
-
-		"Scheduler" <Khaki>,
-		"Memory management" <Khaki>,
-		"Inter-process communication",
-		"Debugging support",
-		...
-	}
-
-	;
-
-	{
 		[ "I/O Subsystem" ]
 
 		{
@@ -482,6 +468,8 @@
 					[ "Socket" ]
 				}
 
+				;
+
 				{
 					[ "Network Protocols" ]
 
@@ -491,6 +479,8 @@
 					"IPSec",
 					"IP 4/6",
 				}
+
+				;
 
 				{
 					[ "NETGRAPH" ]
@@ -533,6 +523,8 @@
 					...
 				}
 
+				;
+
 				{
 					[ "Encryption/Compression" ]
 
@@ -541,6 +533,8 @@
 					"shsec",
 					"uzip",
 				}
+
+				;
 
 				{
 					[ "Filesystem" ]
@@ -552,6 +546,8 @@
 					"bsd",
 				}
 
+				;
+
 				{
 					[ "Virtualization" ]
 
@@ -562,8 +558,6 @@
 					...
 				}
 			}
-
-			;
 
 			{
 				[ "Common Access (CAM)" ]
@@ -614,15 +608,25 @@
 		}
 	}
 
+	{
+		[ "Process Control Subsystem" ]
+
+		"Scheduler" <Khaki>,
+		"Memory management" <Khaki>,
+		"Inter-process communication",
+		"Debugging support",
+		...
+	}
+
 	;
 
-	{
+	wbox {
 		[ "Bus Virtualizations" ]
 	}
 
 	;
 
-	{
+	wbox {
 		[ "Hardware and Architecture Abstractions" ]
 	}
 }

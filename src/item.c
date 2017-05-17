@@ -37,6 +37,5 @@ ILIST *item_push(ILIST *root, ITEM *item) {
 	q = q->nxt;
 
 	q->nxt = p;
-
 	return root;
 }

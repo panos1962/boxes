@@ -1,11 +1,20 @@
 #include "boxes.h"
 
-static void print_indent(size_t level, char *s) {
+static void print_indent(BOX *box, size_t level) {
 	while (level-- > 0)
 	putchar('\t');
 
-	if (s)
-	printf("%s", s);
+	switch (box->vertical) {
+	case BOX_VERTICAL:
+		printf("vbox");
+		break;
+	case BOX_WIDE:
+		printf("wbox");
+		break;
+	default:
+		printf("hbox");
+		break;
+	}
 }
 
 static void print_ilist(ILIST *ilist) {
@@ -23,7 +32,7 @@ static void print_ilist(ILIST *ilist) {
 }
 
 static void print_box(BOX *box, size_t level) {
-	print_indent(level, box->vertical ? "vbox" : "hbox");
+	print_indent(box, level);
 
 	if (box->title)
 	printf(", title = %s", box->title);

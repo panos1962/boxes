@@ -4,11 +4,11 @@
 	{
 		[ "User Commands" ]
 
-		[ SkyBlue ] {
+		<SkyBlue> {
 			[ "Shell (sh)" ]
 		}
 
-		[ SkyBlue ] {
+		<SkyBlue> {
 			[ "Program Development" ]
 
 			"as",
@@ -23,7 +23,7 @@
 			...
 		}
 
-		[ SkyBlue ] {
+		<SkyBlue> {
 			[ "File Management" ]
 
 			"ls",
@@ -34,7 +34,7 @@
 			...
 		}
 
-		[ SkyBlue ] {
+		<SkyBlue> {
 			[ "Text Processing" ]
 
 			"wc",
@@ -44,7 +44,7 @@
 
 		;
 
-		[ SkyBlue ] {
+		<SkyBlue> {
 			[ "Multiuser Commands" ]
 
 			"login",
@@ -55,7 +55,7 @@
 			...
 		}
 
-		[ SkyBlue ] {
+		<SkyBlue> {
 			[ "User Messaging" ]
 
 			"mail",
@@ -63,7 +63,7 @@
 			"write",
 		}
 
-		[ SkyBlue ] {
+		<SkyBlue> {
 			[ "Document Preparation" ]
 
 			"roff",
@@ -89,9 +89,9 @@
 			[ "Filesystem Management" ]
 
 			"check",
-			"mkfs" [ Bisque ],
-			"mount" [ Bisque ],
-			"umount" [ Bisque ],
+			"mkfs" <Bisque>,
+			"mount" <Bisque>,
+			"umount" <Bisque>,
 			"rkd",
 			"rkl",
 			"rkf",
@@ -123,19 +123,19 @@
 		{
 			[ "Assembly Subroutines Library" ]
 
-			"atof" [ LightGreen ],
-			"atoi" [ LightGreen ],
-			"ctime" [ LightGreen ],
-			"exp" [ LightGreen ],
+			"atof" <LightGreen>,
+			"atoi" <LightGreen>,
+			"ctime" <LightGreen>,
+			"exp" <LightGreen>,
 			"fptrap",
 			"ftoa",
 			"get",
 			"itoa",
-			"log" [ LightGreen ],
+			"log" <LightGreen>,
 			"mesg",
 			"ptime",
-			"putc" [ LightGreen ],
-			"sin" [ LightGreen ],
+			"putc" <LightGreen>,
+			"sin" <LightGreen>,
 			"switch",
 		}
 
@@ -143,16 +143,16 @@
 			[ "B Library" ]
 
 			"char",
-			"getchr" [ LightGreen ],
-			"putchr" [ LightGreen ],
-			"printf" [ LightGreen ],
+			"getchr" <LightGreen>,
+			"putchr" <LightGreen>,
+			"printf" <LightGreen>,
 			"lchr",
-			"execl" [ LightGreen ],
-			"execv" [ LightGreen ],
+			"execl" <LightGreen>,
+			"execv" <LightGreen>,
 			"intr",
 			"link",
 			"makdir",
-			"ctime" [ LightGreen ],
+			"ctime" <LightGreen>,
 			...
 		}
 	}
@@ -166,44 +166,44 @@
 	{
 		[ "System Call Interface" ]
 
-		"break" [ LightPink ],
+		"break" <LightPink>,
 		"cemt",
-		"chdir" [ LightPink ],
-		"chmod" [ LightPink ],
-		"chown" [ LightPink ],
-		"close" [ LightPink ],
-		"creat" [ LightPink ],
-		"exec" [ LightPink ],
-		"exit" [ LightPink ],
-		"fork" [ LightPink ],
-		"fstat" [ LightPink ],
-		"getuid" [ LightPink ],
+		"chdir" <LightPink>,
+		"chmod" <LightPink>,
+		"chown" <LightPink>,
+		"close" <LightPink>,
+		"creat" <LightPink>,
+		"exec" <LightPink>,
+		"exit" <LightPink>,
+		"fork" <LightPink>,
+		"fstat" <LightPink>,
+		"getuid" <LightPink>,
 		"gtty",
 		"ilgins",
 		"intr",
-		"link" [ LightPink ],
-		"mkdir" [ LightPink ],
+		"link" <LightPink>,
+		"mkdir" <LightPink>,
 		"mdate",
-		"mount" [ LightPink ],
-		"open" [ LightPink ],
+		"mount" <LightPink>,
+		"open" <LightPink>,
 		"quit",
-		"read" [ LightPink ],
+		"read" <LightPink>,
 		"rele",
-		"seek" [ LightPink ],
-		"setuid" [ LightPink ],
+		"seek" <LightPink>,
+		"setuid" <LightPink>,
 		"smdate",
-		"stat" [ LightPink ],
+		"stat" <LightPink>,
 		"stime",
-		"stty" [ LightPink ],
-		"tell" [ LightPink ],
+		"stty" <LightPink>,
+		"tell" <LightPink>,
 		"time",
-		"umount" [ LightPink ],
-		"unlink" [ LightPink ],
-		"wait" [ LightPink ],
-		"write" [ LightPink ],
+		"umount" <LightPink>,
+		"unlink" <LightPink>,
+		"wait" <LightPink>,
+		"write" <LightPink>,
 	}
 
-	[ Khaki ] {
+	<Khaki> {
 		[ "Boot Loader" ]
 	}
 
@@ -215,11 +215,11 @@
 		"iget",
 		"access",
 		"mget",
-		"wakeup" [ Plum ],
+		"wakeup" <Plum>,
 		"sleep",
-		"namei" [ Plum ],
-		"panic" [ Plum ],
-		"free" [ Plum ],
+		"namei" <Plum>,
+		"panic" <Plum>,
+		"free" <Plum>,
 		"alloc",
 	}
 
@@ -227,7 +227,7 @@
 		[ "I/O Subsystem" ]
 
 		{
-			hbox [ LightSkyBlue ] {
+			<LightSkyBlue> {
 				[ "Special Devices" ]
 
 				"Line discipline",
@@ -239,13 +239,13 @@
 			{
 				[ "Filesystem" ]
 
-				hbox [ LightSkyBlue ] {
+				<LightSkyBlue> {
 					[ "inode layer" ]
 				}
 
 				;
 
-				hbox {
+				{
 					[ "block layer" ]
 				}
 			}
@@ -277,10 +277,11 @@
 		{
 			[ "Process Control Subsystem" ]
 
-			"Scheduler" [ Khaki ],
+			"Scheduler" <Khaki>,
 			"Swap manager",
-			"Memory manager" [ Khaki ],
+			"Memory manager" <Khaki>,
 			...
 		}
 	}
 }
+;

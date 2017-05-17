@@ -73,14 +73,6 @@ static int kwd_lookup(char *);
 	return COLOR;
 }
 
-"[" {
-	return LBRACE1;
-}
-
-"]" {
-	return RBRACE1;
-}
-
 "[[" {
 	return LBRACE2;
 }
@@ -106,6 +98,7 @@ static struct {
 } kwd_table[] = {
 	"hbox",		KWD_HBOX,
 	"vbox",		KWD_VBOX,
+	"wbox",		KWD_WBOX,
 };
 
 static int kwd_lookup(char *s) {
