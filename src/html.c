@@ -78,15 +78,19 @@ static void box_html(BOX *box, unsigned int section) {
 
 static void hlist_html(BOX *box) {
 	ILIST *p;
+	int n;
+
+	for (n = 0, p = box->ilist; p; p = p->nxt)
+	n++;
 
 	if (box->title)
 	printf(
 		"<tr>"
-		"<td colspan=\"100000\">"
+		"<td colspan=\"%d\">"
 		"<div class=\"header\">%s</div>"
 		"</td>"
 		"</tr>",
-		box->title
+		n, box->title
 	);
 
 	puts("<tr class=\"ilist\">");
@@ -158,6 +162,7 @@ void printer_html(BLIST *root, size_t level) {
 	return;
 
 	puts(
+	"<!DOCTYPE html>"
 	"<html>"
 	"<head>"
 
@@ -174,11 +179,13 @@ void printer_html(BLIST *root, size_t level) {
 	".wbox{display:block;}"
 	".tbox{border-style:none;}"
 	".header{text-align:center;padding:2px;text-shadow:1px 0px 0px #343434;}"
-	".vertical{padding:2px;writing-mode:vertical-lr;transform:rotate(-180deg);vertical-align:bottom;}"
+	".vertical{padding:2px;writing-mode:vertical-lr;vertical-align:bottom;"
+	"transform:rotate(-180deg);-webkit-transform:rotate(-180deg);-ms-transform:rotate(-180deg);}"
         ".horizontal{padding:2px;border-style:none none solid none;border-width:2px;}"
 	".horizontal_td{padding:0;vertical-align:top;}"
-	".vcont{position:absolute;transform:rotate(-90deg);}"
-	".antivertical{transform:none;}"
+	".vcont{position:absolute;"
+	"transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-ms-transform:rotate(-90deg);}"
+	".antivertical{transform:none;-webkit-transform:none;-ms-transform:none;}"
 	"</style>"
 
 	"<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>"
@@ -186,11 +193,15 @@ void printer_html(BLIST *root, size_t level) {
 	"<script type=\"text/javascript\">"
 	"\n//<![CDATA[\n"
 
-	"$(window).on('resize', function() {"
+	"$(window).resize(function() {"
 		"location.reload();"
 	"});"
 
 	"$(document).ready(function() {"
+		"diamorfosi();"
+	"});"
+
+	"function diamorfosi() {"
 		"$('table').each(function() {"
 			"var list;"
 			"var filler = undefined;"
@@ -247,7 +258,7 @@ void printer_html(BLIST *root, size_t level) {
 		"vblist = $('.vbox');"
 		"for (vbi = vblist.length - 1; vbi >= 0; vbi--)"
 		"vbox_render($(vblist[vbi]));"
-	"});"
+	"}"
 
 	"function vbox_render(box) {"
 		"vb = true;"
