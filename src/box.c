@@ -1,15 +1,17 @@
 #include "boxes.h"
 
-BOX *box_alloc(void) {
+BOX *box_alloc(BATTRS *b) {
 	BOX *p;
 
 	if (!(p = malloc(sizeof(BOX))))
 	fatal("box_alloc: out of memory", EXIT_MEMORY);
 
-	p->title = NULL;
-	p->font = FONT_UNDEFINED;
-	p->type = BOX_UNDEFINED;
-	p->color = NULL;
+	p->title = b->title;
+	p->font = b->font;
+	p->type = b->type;
+	p->color = b->color;
+	free(b);
+
 	p->section = 0;
 	p->blist = NULL;
 	p->ilist = NULL;

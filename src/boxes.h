@@ -15,9 +15,6 @@
 #define FONT_NORMAL 1
 #define FONT_BOLD 1
 
-#define CONTENTS_BLIST 0
-#define CONTENTS_ILIST 1
-
 // Όλα είναι boxes. Κάθε box μπορεί να έχει επικεφαλίδα, να περιλαμβάνει άλλα
 // subboxes, ή να είναι «τελικό» οπότε απλώς περιλαμβάνει κάποια items.
 //
@@ -74,14 +71,6 @@ typedef struct ILIST {
 	struct ILIST *nxt;
 } ILIST;
 
-typedef struct {
-	union {
-		BLIST *b;
-		ILIST *i;
-	} list;
-	unsigned short type:1;
-} CONTENTS;
-
 extern char *progname;
 extern char *source;
 extern size_t lineno;
@@ -98,7 +87,7 @@ extern void main(int, char *[]);
 extern void error(char *);
 extern void fatal(char *, const unsigned int);
 
-extern BOX *box_alloc(void);
+extern BOX *box_alloc(BATTRS *);
 extern BLIST *blist_alloc(BOX *);
 extern BLIST *box_push(BLIST *, BOX *);
 extern BLIST *break_push(BLIST *);

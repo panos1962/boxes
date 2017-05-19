@@ -2,15 +2,12 @@
 
 #include "boxes.h"
 
-static CONTENTS *contents_alloc(void *, unsigned int);
-
 %}
 
 %union {
 	BLIST *blist;
 	BOX *box;
 	BATTRS *battrs;
-	CONTENTS *c;
 	ILIST *ilist;
 	ITEM *item;
 	char *s;
@@ -22,7 +19,6 @@ static CONTENTS *contents_alloc(void *, unsigned int);
 %type <blist> blist
 %type <box> box
 %type <battrs> battrs
-%type <c> contents
 %type <ilist> ilist
 %type <item> item
 %type <i> btype
@@ -100,30 +96,16 @@ blist
 */
 
 box
-	: battrs '{' contents '}' {
-		$$ = box_alloc();
-
-		$$->title = $1->title;
-		$$->font = $1->font;
-		$$->type = $1->type;
-		$$->color = $1->color;
-		free($1);
-
-		switch ($3->type) {
-		case CONTENTS_BLIST:
-			$$->blist = $3->list.b;
-			$$->ilist = NULL;
-			break;
-		case CONTENTS_ILIST:
-			$$->ilist = $3->list.i;
-			$$->blist = NULL;
-			break;
-		default:
-			$$->ilist = NULL;
-			$$->blist = NULL;
-			break;
-		}
+	: battrs '{' blist '}' {
+		$$ = box_alloc($1);
+		$$->blist = $3;
 	}
+
+	| battrs '{' ilist '}' {
+		$$ = box_alloc($1);
+		$$->ilist = $3;
+	}
+
 	;
 
 battrs
@@ -176,24 +158,6 @@ battrs
 	}
 
 	| battrs error
-	;
-
-/*
-Η δομή contents περιγράφει τα περιεχόμενα ενός box. Όπως είπαμε παραπάνω,
-το box μπορεί να περιέχει άλλα subboxes εν είδει blist, ή item list εφόσον
-πρόκειται για τελικό box. Δεδομένου ότι μια blist μπορεί να είναι κενή,
-δίνεται η δυνατότητα να έχω κενό περιεχόμενο.
-*/
-
-contents
-	: blist {
-		$$ = contents_alloc($1, CONTENTS_BLIST);
-	}
-
-	| ilist {
-		$$ = contents_alloc($1, CONTENTS_ILIST);
-	}
-
 	;
 
 /*
@@ -326,25 +290,3 @@ color
 	;
 
 %%
-
-static CONTENTS *contents_alloc(void *l, unsigned int type) {
-	CONTENTS *p;
-
-	if (!(p = malloc(sizeof(CONTENTS))))
-	fatal("contents_alloc: out of memory", EXIT_MEMORY);
-
-	switch (type) {
-	case CONTENTS_BLIST:
-		p->list.b = (BLIST *)l;
-		break;
-	case CONTENTS_ILIST:
-		p->list.i = (ILIST *)l;
-		break;
-	default:
-		fatal("contents_alloc: invalid type", EXIT_ERROR);
-		break;
-	}
-
-	p->type = type;
-	return p;
-}
