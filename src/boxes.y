@@ -2,12 +2,14 @@
 
 #include "boxes.h"
 
+static CONTENTS *contents_alloc(void *, unsigned int);
+
 %}
 
 %union {
 	BLIST *blist;
 	BOX *box;
-	TITLE *t;
+	BATTRS *battrs;
 	CONTENTS *c;
 	ILIST *ilist;
 	ITEM *item;
@@ -19,11 +21,11 @@
 
 %type <blist> blist
 %type <box> box
-%type <t> title
+%type <battrs> battrs
 %type <c> contents
 %type <ilist> ilist
 %type <item> item
-%type <i> orientation
+%type <i> btype
 %type <s> bcolor
 %type <s> color
 
@@ -98,24 +100,23 @@ blist
 */
 
 box
-	: orientation bcolor '{' title contents '}' {
+	: battrs '{' contents '}' {
 		$$ = box_alloc();
 
-		if ($4) {
-			$$->title = $4->s;
-			$$->font = $4->font;
-		}
+		$$->title = $1->title;
+		$$->font = $1->font;
 
-		$$->vertical = $1;
-		$$->color = $2;
+		$$->vertical = $1->type;
+		$$->color = $1->color;
+		free($1);
 
-		switch ($5->type) {
+		switch ($3->type) {
 		case CONTENTS_BLIST:
-			$$->blist = $5->list.b;
+			$$->blist = $3->list.b;
 			$$->ilist = NULL;
 			break;
 		case CONTENTS_ILIST:
-			$$->ilist = $5->list.i;
+			$$->ilist = $3->list.i;
 			$$->blist = NULL;
 			break;
 		default:
@@ -123,6 +124,41 @@ box
 			$$->blist = NULL;
 		}
 	}
+	;
+
+battrs
+	: {
+		if (!($$ = malloc(sizeof(BATTRS))))
+		fatal("battrs_alloc: out of memory", EXIT_MEMORY);
+
+		$$->type = BOX_HORIZONTAL;
+		$$->color = NULL;
+		$$->title = NULL;
+		$$->font = FONT_NORMAL;
+	}
+
+	| battrs btype {
+		yyerrok;
+		$$->type = $2;
+	}
+
+	| battrs bcolor {
+		yyerrok;
+		$$->color = $2;
+	}
+
+	| battrs '[' STRING ']' {
+		yyerrok;
+		$$->title = $3;
+		$$->font = 0;
+	}
+
+	| battrs LBRACE2 STRING RBRACE2 {
+		$$->title = $3;
+		$$->font = FONT_BOLD;
+	}
+
+	| battrs error
 	;
 
 /*
@@ -144,24 +180,16 @@ contents
 	;
 
 /*
-Ακολουθεί ενότητα καθορισμού προσανοτολισμού box.
+Ακολουθεί ενότητα καθορισμού προσανοτολισμού/μεγέθους box.
 */
 
-orientation
-	/*
-	By default το box θεωρείται «οριζόντιο».
-	*/
-
-	: {
-		$$ = 0;
-	}
-
+btype
 	/*
 	Μπορούμε, ωστόσο, να ορίσουμε ρητά ότι το box είναι
 	«οριζόντιο» με το keyword "hbox".
 	*/
 
-	| KWD_HBOX {
+	: KWD_HBOX {
 		$$ = 0;
 	}
 
@@ -174,7 +202,7 @@ orientation
 	}
 
 	/*
-	Το box καθορίζεται «οριζόντιο» σε όλο το πλάτος του πατρικού
+	Το box καθορίζεται «διάπλατο» σε όλο το πλάτος του πατρικού
 	box (wide box) με το keyword "wbox".
 	*/
 
@@ -189,48 +217,19 @@ orientation
 */
 
 bcolor
-	/*
-	Ο καθορισμός χρώματος είναι προαιρετικός
-	*/
-
-	: {
-		$$ = NULL;
-	}
-
-	| color {
+	: color {
 		$$ = $1;
 	}
 
-	;
-
-/*
-Τα boxes μπορούν να έχουν τίτλο.
-*/
-
-title
 	/*
-	Ο καθορισμός τίτλου είναι προαιρετικός.
+	Αν υπάρχουν τα brackets αλλά δεν υπάρχει χρώμα ανάμεσα στα
+	brackets, τότε το πρόγραμμα θα αντιλαμβάνεται ότι υπάρχει
+	χρώμα, αλλά το χρώμα ως string θα είναι κενό. Αυτό μπορεί
+	να χρησιμοποιηθεί για να «ακυρώσει» το περίγραμμα του box.
 	*/
 
-	: {
-		$$ = NULL;
-	}
-
-	/*
-	Ο τίλος καθορίζεται μέσα σε αγκύλες, π.χ. [ "User Functions" ]
-	*/
-
-	| '[' STRING ']' {
-		$$ = title_alloc($2, FONT_NORMAL);
-	}
-
-	/*
-	Αν οι αγκύλες είναι διπλές, τότε ο τίτλος θα εκτυπωθεί με έντονα
-	στοιχεία, π.χ. [[ "Kernel Space" ]]
-	*/
-
-	| LBRACE2 STRING RBRACE2 {
-		$$ = title_alloc($2, FONT_BOLD);
+	| '<' '>' {
+		$$ = "";
 	}
 
 	;
@@ -299,6 +298,10 @@ item
 	;
 
 color
+	/*
+	Το χρώμα καθορίζεται ως string ανάμεσα σε LT/GT brackets.
+	*/
+
 	: '<' COLOR '>' {
 		$$ = $2;
 	}
@@ -306,3 +309,25 @@ color
 	;
 
 %%
+
+static CONTENTS *contents_alloc(void *l, unsigned int type) {
+	CONTENTS *p;
+
+	if (!(p = malloc(sizeof(CONTENTS))))
+	fatal("contents_alloc: out of memory", EXIT_MEMORY);
+
+	switch (type) {
+	case CONTENTS_BLIST:
+		p->list.b = (BLIST *)l;
+		break;
+	case CONTENTS_ILIST:
+		p->list.i = (ILIST *)l;
+		break;
+	default:
+		fatal("contents_alloc: invalid type", EXIT_ERROR);
+		break;
+	}
+
+	p->type = type;
+	return p;
+}

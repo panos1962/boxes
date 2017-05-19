@@ -1,9 +1,16 @@
-{
-	[ "TEST" ]
-
+[ "TEST\nOook!" ] {
 	"panos",
 	"maria",
-	"akis",
+	"akis\ntasos",
+	"dorak",
+	"stellak",
+	...
+}
+
+[ "TEST\nOook!" ] vbox {
+	"panos",
+	"maria",
+	"akis\ntasos",
 	"dorak",
 	"stellak",
 	...

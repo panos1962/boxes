@@ -1,12 +1,6 @@
-{
-	[[ "User Space" ]]
-
-	{
-		[ "User Commands" ]
-
-		{
-			[ "Shells" ]
-
+[[ "User Space" ]] {
+	[ "User Commands" ] {
+		[ "Shells" ] {
 			"sh" < SkyBlue >,
 			"csh",
 			"bash",
@@ -15,9 +9,7 @@
 			...
 		}
 
-		< SkyBlue > {
-			[ "Program Development" ]
-
+		[ "Program Development" ] < SkyBlue > {
 			"as",
 			"cc",
 			"ld",
@@ -25,9 +17,7 @@
 			...
 		}
 
-		{
-			[ "File Management" ]
-
+		[ "File Management" ] {
 			"ls" < SkyBlue >,
 			"cp" < SkyBlue >,
 			"cmp" < SkyBlue >,
@@ -36,9 +26,7 @@
 			...
 		}
 
-		< SkyBlue > {
-			[ "Multiuser Commands" ]
-
+		[ "Multiuser Commands" ] < SkyBlue > {
 			"login",
 			"chown",
 			"chmod",
@@ -47,9 +35,7 @@
 			...
 		}
 
-		{
-			[ "Number Processing" ]
-
+		[ "Number Processing" ] {
 			"dc",
 			"bc",
 			"units",
@@ -58,9 +44,7 @@
 
 		;
 
-		{
-			[ "Text Processing" ]
-
+		[ "Text Processing" ] {
 			"wc" < SkyBlue >,
 			"grep",
 			"sort" < SkyBlue >,
@@ -68,27 +52,21 @@
 			...
 		}
 
-		{
-			[ "User Messaging" ]
-
+		[ "User Messaging" ] {
 			"mail" < SkyBlue >,
 			"mesg" < SkyBlue >,
 			"write" < SkyBlue >,
 			"talk",
 		}
 
-		{
-			[ "Little Languages" ]
-
+		[ "Little Languages" ] {
 			"sed",
 			"awk",
 			"m4",
 			...
 		}
 
-		{
-			[ "Network clients" ]
-
+		[ "Network clients" ] {
 			"scp",
 			"telnet",
 			"ftp",
@@ -96,9 +74,7 @@
 			...
 		}
 
-		{
-			[ "Document Preparation" ]
-
+		[ "Document Preparation" ] {
 			"*roff" < SkyBlue >,
 			"eqn",
 			"tbl",
@@ -106,17 +82,12 @@
 			...
 		}
 
-		{
-			[ ... ]
+		[ ... ] {
 		}
 	}
 
-	{
-		[ "Administrator & System Commands" ]
-
-		{
-			[ "Filesystem Management" ]
-
+	[ "Administrator & System Commands" ] {
+		[ "Filesystem Management" ] {
 			"fsck",
 			"newfs",
 			"gpart",
@@ -125,18 +96,14 @@
 			...
 		}
 
-		{
-			[ "Networking" ]
-
+		[ "Networking" ] {
 			"ifconfig",
 			"route",
 			"arp",
 			...
 		}
 
-		{
-			[ "User Management" ]
-
+		[ "User Management" ] {
 			"adduser",
 			"vipw",
 			"sa",
@@ -144,9 +111,7 @@
 			...
 		}
 
-		{
-			[ "Statistics" ]
-
+		[ "Statistics" ] {
 			"iostat",
 			"vmstat",
 			"pstat",
@@ -155,9 +120,7 @@
 
 		;
 
-		{
-			[ "Network Servers" ]
-
+		[ "Network Servers" ] {
 			"sshd",
 			"ftpd",
 			"ntpd",
@@ -167,28 +130,21 @@
 			...
 		}
 
-		{
-			[ "Scheduling" ]
-
+		[ "Scheduling" ] {
 			"cron",
 			"periodic",
 			"rc.*",
 			"atrun",
 		}
 
-		{
-			[ ... ]
+		[ ... ] {
 		}
 	}
 
 	;
 
-	{
-		[ "Libraries" ]
-
-		{
-			[ "C Standard" ]
-
+	[ "Libraries" ] {
+		[ "C Standard" ] {
 			"ctype",
 			"math" < LightGreen >,
 			"stdio" < LightGreen >,
@@ -198,9 +154,7 @@
 			...
 		}
 
-		{
-			[ "Operating System" ]
-
+		[ "Operating System" ] {
 			"fcntl",
 			"unistd",
 			"socket",
@@ -210,9 +164,7 @@
 			...
 		}
 
-		{
-			[ "Peripheral Access" ]
-
+		[ "Peripheral Access" ] {
 			"curses",
 			"termcap",
 			"tcgetattr",
@@ -223,9 +175,7 @@
 			...
 		}
 
-		{
-			[ "System File Access" ]
-
+		[ "System File Access" ] {
 			"getlogin",
 			"getgrent",
 			"getprotoent",
@@ -233,9 +183,7 @@
 			...
 		}
 
-		{
-			[ "Data Handling" ]
-
+		[ "Data Handling" ] {
 			"dbm",
 			"dbopen",
 			"btree",
@@ -245,9 +193,7 @@
 			"queue",
 		}
 
-		{
-			[ "Security" ]
-
+		[ "Security" ] {
 			"ssl",
 			"krb",
 			"crypto",
@@ -255,9 +201,7 @@
 			...
 		}
 
-		{
-			[ "Internationalization" ]
-
+		[ "Internationalization" ] {
 			"catopen",
 			"localeconv",
 			"iconv",
@@ -265,28 +209,21 @@
 			...
 		}
 
-		{
-			[ "Threads" ]
-
+		[ "Threads" ] {
 			"stdthreads",
 			"thr",
 			"pthread",
 		}
 
-		{
-			[ ... ]
+		[ ... ] {
 		}
 	}
 }
 
 ;
 
-{
-	[[ "Kernel Space" ]]
-
-	{
-		[ "System Call Interface" ]
-
+[[ "Kernel Space" ]] {
+	[ "System Call Interface" ] {
 		"File management" < LightPink >,
 		"File I/O" < LightPink >,
 		"Mountable filesystems" < LightPink >,
@@ -320,9 +257,7 @@
 		"Jails",
 	}
 
-	{
-		[ "Bootstrapping" ]
-
+	[ "Bootstrapping" ] {
 		"Loaders" <Khaki>,
 		"Configuration",
 		"Kernel modules",
@@ -330,12 +265,8 @@
 
 	;
 
-	vbox {
-		[ "Kernel Utility Functions" ]
-
-		{
-			[ "Generic" ]
-
+	[ "Kernel Utility Functions" ] vbox {
+		[ "Generic" ] {
 			"namei" <Plum>,
 			"nvlist",
 			"osd",
@@ -345,8 +276,7 @@
 			...
 		}
 
-		{
-			[ "Memory Management" ]
+		[ "Memory Management" ] {
 
 			"vmem",
 			"uma",
@@ -358,8 +288,7 @@
 			...
 		}
 
-		{
-			[ "Multitasking" ]
+		[ "Multitasking" ] {
 
 			"kproc",
 			"taskque",
@@ -369,9 +298,7 @@
 			...
 		}
 
-		{
-			[ "Privilege Mgmt" ]
-
+		[ "Privilege Mgmt" ] {
 			"acl",
 			"mac",
 			"priv",
@@ -380,9 +307,7 @@
 
 		;
 
-		{
-			[ "Operations" ]
-
+		[ "Operations" ] {
 			"panic" <Plum>,
 			"sysctl",
 			"dtrace",
@@ -393,9 +318,7 @@
 			...
 		}
 
-		{
-			[ "Synchronization" ]
-
+		[ "Synchronization" ] {
 			"wakeup" <Plum>,
 			"*lock",
 			"sx",
@@ -408,9 +331,7 @@
 			...
 		}
 
-		{
-			[ "Virtualization" ]
-
+		[ "Virtualization" ] {
 			"cpuset",
 			"usb*",
 			"crypto",
@@ -422,29 +343,20 @@
 		}
 	}
 
-	{
-		[ "I/O Subsystem" ]
-
-		{
-			[ "Vnode, Object, active file entries, and VM Interfaces" ]
-
-			<LightSkyBlue> {
-				[ "Special Devices" ]
-
+	[ "I/O Subsystem" ] {
+		[ "Vnode, Object, active file entries, and VM Interfaces" ] {
+			[ "Special Devices" ] <LightSkyBlue> {
 				"Line discipline",
 				"tty",
 				"Raw character",
 				"Raw disk",
 			}
 
-			{
-				{
-					[ "VM" ]
+			<> {
+				[ "VM" ] {
 				}
 
-				{
-					[ "Filesystem layers/types" ]
-
+				[ "Filesystem layers/types" ] {
 					"UFS",
 					"FFS",
 					"NFS",
@@ -458,21 +370,17 @@
 
 				;
 
-				{
-					[ "Buffer/Page cache" ]
+				[ "Buffer/Page cache" ] {
 				}
 			}
 
-			{
-				{
-					[ "Socket" ]
+			<> {
+				[ "Socket" ] {
 				}
 
 				;
 
-				{
-					[ "Network Protocols" ]
-
+				[ "Network Protocols" ] {
 					"TCP",
 					"UDP",
 					"ICMP 4/6",
@@ -482,9 +390,7 @@
 
 				;
 
-				{
-					[ "NETGRAPH" ]
-
+				[ "NETGRAPH" ] {
 					"ng_async",
 					"ng_atm",
 					"ng_bpf",
@@ -496,12 +402,8 @@
 
 		;
 
-		{
-			[ "Device Drivers and Abstractions" ]
-
-			{
-				[ "Character Devices" ]
-
+		[ "Device Drivers and Abstractions" ] {
+			[ "Character Devices" ] {
 				"Keyboard" <LightSkyBlue>,
 				"Mouse",
 				"Printer" <LightSkyBlue>,
@@ -509,12 +411,8 @@
 				...
 			}
 
-			{
-				[ "GEOM (disk I/O)" ]
-
-				{
-					[ "Storage" ]
-
+			[ "GEOM (disk I/O)" ] {
+				[ "Storage" ] {
 					"stripe",
 					"mirror",
 					"raid3",
@@ -525,9 +423,7 @@
 
 				;
 
-				{
-					[ "Encryption/Compression" ]
-
+				[ "Encryption/Compression" ] {
 					"eli",
 					"bde",
 					"shsec",
@@ -536,9 +432,7 @@
 
 				;
 
-				{
-					[ "Filesystem" ]
-
+				[ "Filesystem" ] {
 					"label",
 					"journal",
 					"cache",
@@ -548,9 +442,7 @@
 
 				;
 
-				{
-					[ "Virtualization" ]
-
+				[ "Virtualization" ] {
 					"md",
 					"nop",
 					"fate",
@@ -559,9 +451,7 @@
 				}
 			}
 
-			{
-				[ "Common Access (CAM)" ]
-
+			[ "Common Access (CAM)" ] {
 				"ATA",
 				"SATA",
 				"SPI",
@@ -569,24 +459,18 @@
 				...
 			}
 
-			{
-				[ "Network Interface Drivers" ]
-
+			[ "Network Interface Drivers" ] {
 				{
-					{
-						[ "802.11 layer" ]
+					[ "802.11 layer" ] <> {
 					}
 
 					;
 
-					{
-						[ "802.11 drivers" ]
+					[ "802.11 drivers" ] <> {
 					}
 				}
 
-				{
-					[ "Native drivers" ]
-
+				[ "Native drivers" ] {
 					"if_ae",
 					"if_age",
 					"... (100+)",
@@ -594,23 +478,19 @@
 				}
 
 				{
-					{
-						[ "NDIS wrapper" ]
+					[ "NDIS wrapper" ] <> {
 					}
 
 					;
 
-					{
-						[ "NDIS drivers" ]
+					[ "NDIS drivers" ] <> {
 					}
 				}
 			}
 		}
 	}
 
-	{
-		[ "Process Control Subsystem" ]
-
+	[ "Process Control Subsystem" ] {
 		"Scheduler" <Khaki>,
 		"Memory management" <Khaki>,
 		"Inter-process communication",
@@ -620,13 +500,11 @@
 
 	;
 
-	wbox {
-		[ "Bus Virtualizations" ]
+	[ "Bus Virtualizations" ] wbox {
 	}
 
 	;
 
-	wbox {
-		[ "Hardware and Architecture Abstractions" ]
+	[ "Hardware and Architecture Abstractions" ] wbox {
 	}
 }

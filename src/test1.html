@@ -1,6 +1,6 @@
-<!DOCTYPE html><html><head><style>.bold{font-weight:bold;text-shadow:1px 0px 0px #A0A0A0;}.italic{font-family:italic;}.underline{text-decoration:underline;}div{white-space:nowrap;}table{border-collapse:collapse;}td{padding:2px;}table,td{border:2px solid black;}.box{position:relative;display:inline-block;margin:10px;vertical-align:top;border-style:solid;border-width:2px}.wbox{display:block;}.tbox{border-style:none;}.header{text-align:center;padding:2px;text-shadow:1px 0px 0px #343434;}.vertical{padding:2px;writing-mode:vertical-lr;vertical-align:bottom;transform:rotate(-180deg);-webkit-transform:rotate(-180deg);-ms-transform:rotate(-180deg);}.horizontal{padding:2px;border-style:none none solid none;border-width:2px;}.horizontal_td{padding:0;vertical-align:top;}.vcont{position:absolute;transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-ms-transform:rotate(-90deg);}.antivertical{transform:none;-webkit-transform:none;-ms-transform:none;}</style><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><script type="text/javascript">
+<!DOCTYPE html><html><head><style>.bold{font-weight:bold;text-shadow:1px 0px 0px #A0A0A0;}.italic{font-family:italic;}.underline{text-decoration:underline;}div{white-space:nowrap;}table{border-collapse:collapse;}td{padding:2px;}table,td{border:2px solid black;}.box{position:relative;display:inline-block;margin:10px;vertical-align:top;border-style:solid;border-width:2px}.box_transparent{margin:0;border-style:none;}.wbox{display:block;}.tbox{border-style:none;}.header{text-align:center;padding:2px;text-shadow:1px 0px 0px #343434;}.vertical{padding:2px;writing-mode:vertical-lr;vertical-align:bottom;transform:rotate(-180deg);-webkit-transform:rotate(-180deg);-ms-transform:rotate(-180deg);}.horizontal{padding:2px;border-style:none none solid none;border-width:2px;}.horizontal_td{padding:0;vertical-align:top;}.vcont{position:absolute;transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-ms-transform:rotate(-90deg);}.antivertical{transform:none;-webkit-transform:none;-ms-transform:none;}</style><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><script type="text/javascript">
 //<![CDATA[
-$(window).resize(function() {location.reload();});$(document).ready(function() {diamorfosi();});function diamorfosi() {$('table').each(function() {var list;var filler = undefined;var hmax = 0;var wone = 0;var wall = 0;var vblist;var vbi;$(this).parent().addClass('tbox');list = $(this).find('.vertical');if (list.length) {list.each(function() {var h = $(this).height();if (h > hmax)hmax = h;if ($(this).hasClass('filler')) {filler = $(this);wone = $(this).outerWidth(true);}wall += $(this).parent().innerWidth();return true;});list.css('height', hmax + 'px');if (filler) {if ((wall / list.length) / wone > 1.2)filler.parent().css('width', (wall - (list.length * wone) + wone) + 'px');}}list = $(this).find('.horizontal');if (list.length) {list.each(function() {$(this).parent().addClass('horizontal_td');});$(list[list.length - 1]).css('border-style', 'none');return true;}return true;});vblist = $('.vbox');for (vbi = vblist.length - 1; vbi >= 0; vbi--)vbox_render($(vblist[vbi]));}function vbox_render(box) {vb = true;var w = box.outerWidth(true);var w1 = box.width();var h = box.outerHeight(true);var h1 = box.height();var x = box.html();var y;box.removeClass('vbox');box.css({width: h + 'px',height: w + 'px',}).empty().append(y = $('<div>').addClass('vcont').html(x).css({top: ((w / 2) - (h1 / 2)) + 'px',left: ((h / 2) - (w1 / 2)) + 'px',}));y.find('.vertical').addClass('antivertical');box.find('.ilist').each(function() {var x = $(this).children();var i;$(this).empty();for (i = x.length - 1; i >= 0; i--)$(this).append(x.get(i));return true;});}
+$(window).resize(function() {location.reload();});$(document).ready(function() {render();});function render() {var vblist;var i;$('table').each(function() {table_render.call($(this));return true;});vblist = $('.vbox');for (i = vblist.length - 1; i >= 0; i--)vbox_render.call($(vblist[i]));}function table_render() {var list;var filler;var hmax = 0;var wone = 0;var wall = 0;$(this).parent().addClass('tbox');list = $(this).find('.vertical');if (list.length) {filler = undefined;list.each(function() {var h = $(this).height();if (h > hmax)hmax = h;if ($(this).hasClass('filler')) {filler = $(this);wone = $(this).outerWidth(true);}wall += $(this).parent().innerWidth();return true;});list.css('height', hmax + 'px');if (filler) {if ((wall / list.length) / wone > 1.2)filler.parent().css('width', (wall - (list.length * wone) + wone) + 'px');}}list = $(this).find('.horizontal');if (list.length) {list.each(function() {$(this).parent().addClass('horizontal_td');return true;});$(list[list.length - 1]).css('border-style', 'none');}}function vbox_render() {vb = true;var w = $(this).outerWidth(true);var w1 = $(this).width();var h = $(this).outerHeight(true);var h1 = $(this).height();var x = $(this).html();var y;$(this).removeClass('vbox');$(this).css({width: h + 'px',height: w + 'px',}).empty().append(y = $('<div>').addClass('vcont').html(x).css({top: ((w / 2) - (h1 / 2)) + 'px',left: ((h / 2) - (w1 / 2)) + 'px',}));y.find('.vertical').addClass('antivertical');$(this).find('.ilist').each(function() {var x = $(this).children();var i;$(this).empty();for (i = x.length - 1; i >= 0; i--)$(this).append(x.get(i));return true;});}
 //]]>
 </script></head><body>
 <div class="box">
@@ -12,7 +12,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 </div>
 <div class="box" style="background-color:SkyBlue;">
 <table>
-<tbody><tr><td colspan="10"><div class="header">Program Development</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="10"><div class="header">Program Development</div></td></tr>
+<tr class="ilist">
 <td><div class="vertical">as</div></td>
 <td><div class="vertical">ar</div></td>
 <td><div class="vertical">b</div></td>
@@ -29,7 +30,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 </div>
 <div class="box" style="background-color:SkyBlue;">
 <table>
-<tbody><tr><td colspan="6"><div class="header">File Management</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="6"><div class="header">File Management</div></td></tr>
+<tr class="ilist">
 <td><div class="vertical">ls</div></td>
 <td><div class="vertical">cp</div></td>
 <td><div class="vertical">cmp</div></td>
@@ -42,7 +44,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 </div>
 <div class="box" style="background-color:SkyBlue;">
 <table>
-<tbody><tr><td colspan="3"><div class="header">Text Processing</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="3"><div class="header">Text Processing</div></td></tr>
+<tr class="ilist">
 <td><div class="vertical">wc</div></td>
 <td><div class="vertical">cat</div></td>
 <td><div class="vertical">sort</div></td>
@@ -53,7 +56,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 <br/>
 <div class="box" style="background-color:SkyBlue;">
 <table>
-<tbody><tr><td colspan="6"><div class="header">Multiuser Commands</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="6"><div class="header">Multiuser Commands</div></td></tr>
+<tr class="ilist">
 <td><div class="vertical">login</div></td>
 <td><div class="vertical">chown</div></td>
 <td><div class="vertical">chmod</div></td>
@@ -66,7 +70,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 </div>
 <div class="box" style="background-color:SkyBlue;">
 <table>
-<tbody><tr><td colspan="3"><div class="header">User Messaging</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="3"><div class="header">User Messaging</div></td></tr>
+<tr class="ilist">
 <td><div class="vertical">mail</div></td>
 <td><div class="vertical">mesg</div></td>
 <td><div class="vertical">write</div></td>
@@ -76,7 +81,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 </div>
 <div class="box" style="background-color:SkyBlue;">
 <table>
-<tbody><tr><td colspan="4"><div class="header">Document Preparation</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="4"><div class="header">Document Preparation</div></td></tr>
+<tr class="ilist">
 <td><div class="vertical">roff</div></td>
 <td><div class="vertical">form</div></td>
 <td><div class="vertical">pr</div></td>
@@ -87,7 +93,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 </div>
 <div class="box">
 <table>
-<tbody><tr><td colspan="4"><div class="header">Games</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="4"><div class="header">Games</div></td></tr>
+<tr class="ilist">
 <td><div class="vertical">bj</div></td>
 <td><div class="vertical">chess</div></td>
 <td><div class="vertical">moo</div></td>
@@ -101,7 +108,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 <div class="header">Administrator & System Commands</div>
 <div class="box">
 <table>
-<tbody><tr><td colspan="8"><div class="header">Filesystem Management</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="8"><div class="header">Filesystem Management</div></td></tr>
+<tr class="ilist">
 <td><div class="vertical">check</div></td>
 <td style="background-color:Bisque;"><div class="vertical">mkfs</div></td>
 <td style="background-color:Bisque;"><div class="vertical">mount</div></td>
@@ -116,7 +124,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 </div>
 <div class="box">
 <table>
-<tbody><tr><td colspan="7"><div class="header">Peripheral Access</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="7"><div class="header">Peripheral Access</div></td></tr>
+<tr class="ilist">
 <td><div class="vertical">bcd</div></td>
 <td><div class="vertical">dtf</div></td>
 <td><div class="vertical">lbppt</div></td>
@@ -137,7 +146,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 <div class="header">Library</div>
 <div class="box">
 <table>
-<tbody><tr><td colspan="14"><div class="header">Assembly Subroutines Library</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="14"><div class="header">Assembly Subroutines Library</div></td></tr>
+<tr class="ilist">
 <td style="background-color:LightGreen;"><div class="vertical">atof</div></td>
 <td style="background-color:LightGreen;"><div class="vertical">atoi</div></td>
 <td style="background-color:LightGreen;"><div class="vertical">ctime</div></td>
@@ -158,7 +168,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 </div>
 <div class="box">
 <table>
-<tbody><tr><td colspan="12"><div class="header">B Library</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="12"><div class="header">B Library</div></td></tr>
+<tr class="ilist">
 <td><div class="vertical">char</div></td>
 <td style="background-color:LightGreen;"><div class="vertical">getchr</div></td>
 <td style="background-color:LightGreen;"><div class="vertical">putchr</div></td>
@@ -182,7 +193,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 <div class="header bold">Kernel Space</div>
 <div class="box">
 <table>
-<tbody><tr><td colspan="35"><div class="header">System Call Interface</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="35"><div class="header">System Call Interface</div></td></tr>
+<tr class="ilist">
 <td style="background-color:LightPink;"><div class="vertical">break</div></td>
 <td><div class="vertical">cemt</div></td>
 <td style="background-color:LightPink;"><div class="vertical">chdir</div></td>
@@ -229,8 +241,18 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 <div class="box">
 <table>
 <tbody><tr>
-<td><div class="vertical header">Kernel Utility Functions</div></td><td>
-<div class="horizontal">iget</div><div class="horizontal">access</div><div class="horizontal">mget</div><div class="horizontal" style="background-color:Plum;">wakeup</div><div class="horizontal">sleep</div><div class="horizontal" style="background-color:Plum;">namei</div><div class="horizontal" style="background-color:Plum;">panic</div><div class="horizontal" style="background-color:Plum;">free</div><div class="horizontal">alloc</div></td>
+<td><div class="vertical header">Kernel Utility Functions</div></td>
+<td>
+<div class="horizontal">iget</div>
+<div class="horizontal">access</div>
+<div class="horizontal">mget</div>
+<div class="horizontal" style="background-color:Plum;">wakeup</div>
+<div class="horizontal">sleep</div>
+<div class="horizontal" style="background-color:Plum;">namei</div>
+<div class="horizontal" style="background-color:Plum;">panic</div>
+<div class="horizontal" style="background-color:Plum;">free</div>
+<div class="horizontal">alloc</div>
+</td>
 </tbody>
 </table>
 </div>
@@ -239,7 +261,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 <div class="box">
 <div class="box" style="background-color:LightSkyBlue;">
 <table>
-<tbody><tr><td colspan="4"><div class="header">Special Devices</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="4"><div class="header">Special Devices</div></td></tr>
+<tr class="ilist">
 <td><div class="vertical">Line discipline</div></td>
 <td><div class="vertical">tty</div></td>
 <td><div class="vertical">Raw character</div></td>
@@ -263,7 +286,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 <div class="header">Device Drivers</div>
 <div class="box">
 <table>
-<tbody><tr><td colspan="4"><div class="header">Character Devices</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="4"><div class="header">Character Devices</div></td></tr>
+<tr class="ilist">
 <td><div class="vertical">Keyboard</div></td>
 <td><div class="vertical">Printer</div></td>
 <td><div class="vertical">Paper tape</div></td>
@@ -274,7 +298,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 </div>
 <div class="box">
 <table>
-<tbody><tr><td colspan="3"><div class="header">Block Devices</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="3"><div class="header">Block Devices</div></td></tr>
+<tr class="ilist">
 <td><div class="vertical">rk: RK03 disk</div></td>
 <td><div class="vertical">rf: RK11 disk</div></td>
 <td><div class="vertical">mem</div></td>
@@ -286,7 +311,8 @@ $(window).resize(function() {location.reload();});$(document).ready(function() {
 </div>
 <div class="box">
 <table>
-<tbody><tr><td colspan="4"><div class="header">Process Control Subsystem</div></td></tr><tr class="ilist">
+<tbody><tr><td colspan="4"><div class="header">Process Control Subsystem</div></td></tr>
+<tr class="ilist">
 <td style="background-color:Khaki;"><div class="vertical">Scheduler</div></td>
 <td><div class="vertical">Swap manager</div></td>
 <td style="background-color:Khaki;"><div class="vertical">Memory manager</div></td>

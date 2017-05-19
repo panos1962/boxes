@@ -40,6 +40,13 @@ typedef struct {
 	struct ILIST *ilist;		// item list
 } BOX;
 
+typedef struct {
+	unsigned int type:2;
+	char *color;
+	char *title;
+	unsigned int font;
+} BATTRS;
+
 // Οπωσδήποτε θα χρειαστούμε λίστες από boxes. Το ίδιο το input είναι μια
 // box list, ενώ τα ίδια τα boxes μπορούν να περιέχεουν άλλα boxes ως box
 // list.
@@ -66,17 +73,6 @@ typedef struct ILIST {
 	ITEM *item;
 	struct ILIST *nxt;
 } ILIST;
-
-// Για τις ανάγκες της ανάγνωσης και αναγνώρισης του input χρειάζεται να
-// δημιουργήσουμε δομή τίτλου στην οποία περιλαμβάνεται το λεκτικό του
-// τίτλου και τα χαρακτηριστικά γραφής. Η δομή τίτλου χρησιμοποιείται
-// μόνο προσωρινά, καθώς τα στοιχεία της δομής μεταγράφονται αυτούσια
-// στο αντίστοιχο box.
-
-typedef struct {
-	char *s;
-	unsigned int font;
-} TITLE;
 
 typedef struct {
 	union {
@@ -111,9 +107,6 @@ extern BLIST *blist_push(BLIST *);
 extern ITEM *item_alloc(char *, char *);
 extern ILIST *ilist_alloc(ITEM *);
 extern ILIST *item_push(ILIST *, ITEM *);
-
-extern TITLE *title_alloc(char *, unsigned int);
-extern CONTENTS *contents_alloc(void *, unsigned int);
 
 extern char *strsave(char *);
 extern char *strnsave(char *, size_t);

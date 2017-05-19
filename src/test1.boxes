@@ -1,16 +1,10 @@
-{
-	[[ "User Space" ]]
+[[ "User Space" ]] {
+	[ "User Commands" ] {
 
-	{
-		[ "User Commands" ]
-
-		<SkyBlue> {
-			[ "Shell (sh)" ]
+		[ "Shell (sh)" ] <SkyBlue> {
 		}
 
-		<SkyBlue> {
-			[ "Program Development" ]
-
+		[ "Program Development" ] <SkyBlue> {
 			"as",
 			"ar",
 			"b",
@@ -23,9 +17,7 @@
 			...
 		}
 
-		<SkyBlue> {
-			[ "File Management" ]
-
+		[ "File Management" ] <SkyBlue> {
 			"ls",
 			"cp",
 			"cmp",
@@ -34,9 +26,7 @@
 			...
 		}
 
-		<SkyBlue> {
-			[ "Text Processing" ]
-
+		[ "Text Processing" ] <SkyBlue> {
 			"wc",
 			"cat",
 			"sort",
@@ -44,9 +34,7 @@
 
 		;
 
-		<SkyBlue> {
-			[ "Multiuser Commands" ]
-
+		[ "Multiuser Commands" ] <SkyBlue> {
 			"login",
 			"chown",
 			"chmod",
@@ -55,26 +43,20 @@
 			...
 		}
 
-		<SkyBlue> {
-			[ "User Messaging" ]
-
+		[ "User Messaging" ] <SkyBlue> {
 			"mail",
 			"mesg",
 			"write",
 		}
 
-		<SkyBlue> {
-			[ "Document Preparation" ]
-
+		[ "Document Preparation" ] <SkyBlue> {
 			"roff",
 			"form",
 			"pr",
 			...
 		}
 
-		{
-			[ "Games" ]
-
+		[ "Games" ] {
 			"bj",
 			"chess",
 			"moo",
@@ -82,12 +64,8 @@
 		}
 	}
 
-	{
-		[ "Administrator & System Commands" ]
-
-		{
-			[ "Filesystem Management" ]
-
+	[ "Administrator & System Commands" ] {
+		[ "Filesystem Management" ] {
 			"check",
 			"mkfs" <Bisque>,
 			"mount" <Bisque>,
@@ -98,9 +76,7 @@
 			...
 		}
 
-		{
-			[ "Peripheral Access" ]
-
+		[ "Peripheral Access" ] {
 			"bcd",
 			"dtf",
 			"lbppt",
@@ -110,19 +86,14 @@
 			...
 		}
 
-		{
-			[ ... ]
+		[ ... ] {
 		}
 	}
 
 	;
 
-	{
-		[ "Library" ]
-
-		{
-			[ "Assembly Subroutines Library" ]
-
+	[ "Library" ] {
+		[ "Assembly Subroutines Library" ] {
 			"atof" <LightGreen>,
 			"atoi" <LightGreen>,
 			"ctime" <LightGreen>,
@@ -139,8 +110,7 @@
 			"switch",
 		}
 
-		{
-			[ "B Library" ]
+		[ "B Library" ] {
 
 			"char",
 			"getchr" <LightGreen>,
@@ -160,12 +130,8 @@
 
 ;
 
-{
-	[[ "Kernel Space" ]]
-
-	{
-		[ "System Call Interface" ]
-
+[[ "Kernel Space" ]] {
+	[ "System Call Interface" ] {
 		"break" <LightPink>,
 		"cemt",
 		"chdir" <LightPink>,
@@ -203,15 +169,12 @@
 		"write" <LightPink>,
 	}
 
-	<Khaki> {
-		[ "Boot Loader" ]
+	[ "Boot Loader" ] <Khaki> {
 	}
 
 	;
 
-	vbox {
-		[ "Kernel Utility Functions" ]
-
+	[ "Kernel Utility Functions" ] vbox {
 		"iget",
 		"access",
 		"mget",
@@ -223,50 +186,36 @@
 		"alloc",
 	}
 
-	{
-		[ "I/O Subsystem" ]
-
+	[ "I/O Subsystem" ] {
 		{
-			<LightSkyBlue> {
-				[ "Special Devices" ]
-
+			[ "Special Devices" ] <LightSkyBlue> {
 				"Line discipline",
 				"tty",
 				"Raw character",
 				"Raw disk",
 			}
 
-			{
-				[ "Filesystem" ]
-
-				<LightSkyBlue> {
-					[ "inode layer" ]
+			[ "Filesystem" ] {
+				[ "inode layer" ] <LightSkyBlue> {
 				}
 
 				;
 
-				{
-					[ "block layer" ]
+				[ "block layer" ] {
 				}
 			}
 
 			;
 
-			{
-				[ "Device Drivers" ]
-
-				{
-					[ "Character Devices" ]
-
+			[ "Device Drivers" ] {
+				[ "Character Devices" ] {
 					"Keyboard",
 					"Printer",
 					"Paper tape",
 					...
 				}
 
-				{
-					[ "Block Devices" ]
-
+				[ "Block Devices" ] {
 					"rk: RK03 disk",
 					"rf: RK11 disk",
 					"mem",
@@ -274,9 +223,7 @@
 			}
 		}
 
-		{
-			[ "Process Control Subsystem" ]
-
+		[ "Process Control Subsystem" ] {
 			"Scheduler" <Khaki>,
 			"Swap manager",
 			"Memory manager" <Khaki>,

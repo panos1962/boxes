@@ -38,9 +38,6 @@ static int kwd_lookup(char *);
 		case 'n':
 			*p++ = '\n';
 			break;
-		case 't':
-			*p++ = '\t';
-			break;
 		case '"':
 			*p++ = '"';
 			break;
