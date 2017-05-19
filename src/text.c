@@ -4,7 +4,7 @@ static void print_indent(BOX *box, size_t level) {
 	while (level-- > 0)
 	putchar('\t');
 
-	switch (box->vertical) {
+	switch (box->type) {
 	case BOX_VERTICAL:
 		printf("vbox");
 		break;

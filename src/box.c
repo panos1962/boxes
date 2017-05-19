@@ -7,8 +7,8 @@ BOX *box_alloc(void) {
 	fatal("box_alloc: out of memory", EXIT_MEMORY);
 
 	p->title = NULL;
-	p->font = 0;
-	p->vertical = 0;
+	p->font = FONT_UNDEFINED;
+	p->type = BOX_UNDEFINED;
 	p->color = NULL;
 	p->section = 0;
 	p->blist = NULL;

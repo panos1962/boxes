@@ -105,8 +105,7 @@ box
 
 		$$->title = $1->title;
 		$$->font = $1->font;
-
-		$$->vertical = $1->type;
+		$$->type = $1->type;
 		$$->color = $1->color;
 		free($1);
 
@@ -122,6 +121,7 @@ box
 		default:
 			$$->ilist = NULL;
 			$$->blist = NULL;
+			break;
 		}
 	}
 	;
@@ -131,29 +131,46 @@ battrs
 		if (!($$ = malloc(sizeof(BATTRS))))
 		fatal("battrs_alloc: out of memory", EXIT_MEMORY);
 
-		$$->type = BOX_HORIZONTAL;
+		$$->type = BOX_UNDEFINED;
 		$$->color = NULL;
 		$$->title = NULL;
-		$$->font = FONT_NORMAL;
+		$$->font = FONT_UNDEFINED;
 	}
 
 	| battrs btype {
 		yyerrok;
+
+		if ($$->type != BOX_UNDEFINED)
+		error("box type redefinition");
+
 		$$->type = $2;
 	}
 
 	| battrs bcolor {
 		yyerrok;
+
+		if ($$->color)
+		error("box color redefinition");
+
 		$$->color = $2;
 	}
 
 	| battrs '[' STRING ']' {
 		yyerrok;
+
+		if ($$->title)
+		error("box title redefinition");
+
 		$$->title = $3;
 		$$->font = 0;
 	}
 
 	| battrs LBRACE2 STRING RBRACE2 {
+		yyerrok;
+
+		if ($$->title != BOX_UNDEFINED)
+		error("box title redefinition");
+
 		$$->title = $3;
 		$$->font = FONT_BOLD;
 	}
@@ -190,7 +207,7 @@ btype
 	*/
 
 	: KWD_HBOX {
-		$$ = 0;
+		$$ = BOX_HORIZONTAL;
 	}
 
 	/*
@@ -198,7 +215,7 @@ btype
 	*/
 
 	| KWD_VBOX {
-		$$ = 1;
+		$$ = BOX_VERTICAL;
 	}
 
 	/*
@@ -207,7 +224,7 @@ btype
 	*/
 
 	| KWD_WBOX {
-		$$ = 2;
+		$$ = BOX_WIDE;
 	}
 
 	;

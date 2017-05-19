@@ -33,12 +33,6 @@ void printer_html(BLIST *root, size_t level) {
 		"font-weight:bold;"
 		"text-shadow:1px 0px 0px #A0A0A0;"
 	"}"
-	".italic{"
-		"font-family:italic;"
-	"}"
-	".underline{"
-		"text-decoration:underline;"
-	"}"
 	"div{"
 		"white-space:nowrap;"
 	"}"
@@ -237,7 +231,7 @@ static void box_html(BOX *box, unsigned int section) {
 	if (box->ilist) {
 		printf("<div class=\"box");
 
-		if (box->vertical == BOX_WIDE)
+		if (box->type == BOX_WIDE)
 		printf(" wbox");
 
 		if (box_transparent(box))
@@ -253,7 +247,7 @@ static void box_html(BOX *box, unsigned int section) {
 		puts("<table>");
 		printf("<tbody>");
 
-		if (box->vertical == BOX_VERTICAL)
+		if (box->type == BOX_VERTICAL)
 		vlist_html(box);
 
 		else
@@ -266,7 +260,7 @@ static void box_html(BOX *box, unsigned int section) {
 	else {
 		printf("<div class=\"box");
 
-		switch (box->vertical) {
+		switch (box->type) {
 		case BOX_VERTICAL:
 			printf(" vbox");
 			break;
@@ -290,12 +284,6 @@ static void box_html(BOX *box, unsigned int section) {
 
 			if (box->font & FONT_BOLD)
 			printf(" bold");
-
-			if (box->font & FONT_ITALIC)
-			printf(" italic");
-
-			if (box->font & FONT_UNDERLINE)
-			printf(" underline");
 
 			printf("\">");
 			string_html(box->title);

@@ -6,14 +6,14 @@
 #define EXIT_ERROR 2
 #define EXIT_MEMORY 3
 
-#define BOX_HORIZONTAL 0
-#define BOX_VERTICAL 1
-#define BOX_WIDE 2
+#define BOX_UNDEFINED 0
+#define BOX_HORIZONTAL 1
+#define BOX_VERTICAL 2
+#define BOX_WIDE 3
 
-#define FONT_NORMAL 0
+#define FONT_UNDEFINED 0
+#define FONT_NORMAL 1
 #define FONT_BOLD 1
-#define FONT_ITALIC 2
-#define FONT_UNDERLINE 4
 
 #define CONTENTS_BLIST 0
 #define CONTENTS_ILIST 1
@@ -32,8 +32,8 @@
 
 typedef struct {
 	char *title;
-	unsigned int font:3;		// 0: normal, 1: bold, 2: italic, 4: underline
-	unsigned int vertical:2;	// 0: horizontal, 1: vertical, 2: wide
+	unsigned int font:2;		// 0: undefined, 1: normal, 2: bold
+	unsigned int type:2;		// 0: undefined, 1: horizontal, 2: vertical, 3: wide
 	char *color;			// box background color
 	unsigned int section:1;		// next box position (0: inline, 1: break)
 	struct BLIST *blist;		// subbox list
